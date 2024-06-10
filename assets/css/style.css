@@ -1,0 +1,56 @@
+/* Global Webpage Settings ------------------------------------------------*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+:root {
+ --primary: #a4e1f2;
+ --secondary: #114a8b;
+ --background: #e1f5fa;
+ --text-color: #ffffff;
+ --dark-text: #000000; 
+}
+
+html {
+    font-size: 62.5%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: (var(--dark-text));
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+body {
+    background-color: var(--background);
+    font-size: 1.75rem;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+main {
+    position: relative;
+}
+
+/* Header/Nav ------------------------------------------------------------------------------------*/
+header {
+    padding: 2rem;
+    background-color: var(--secondary);
+    color: (var(--text-color));
+}
+
+h1 {
+    display: inline-block;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-left: 10px;
+}
