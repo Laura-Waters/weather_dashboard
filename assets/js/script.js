@@ -33,7 +33,18 @@ const getCoordinates = function(city) {
         if(response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                getWeatherData(); 
+
+                let coordinates = []; 
+                
+                for (let i=0; i < data.length; i++) {
+                    const currentCity = data[i];
+                    const lat = currentCity.lat; 
+                    const lon = currentCity.lon;
+                    coordinates.push(lat, lon); 
+                    localStorage.setItem('coordinates', JSON.stringify(coordinates));
+                  }
+
+                getWeatherData(coordinates); 
             });
         } else {
             alert('Error'); 
@@ -45,8 +56,24 @@ const getCoordinates = function(city) {
     })
 }; 
 
-const getWeatherData = function() {
+const getWeatherData = function(coordinates) {
+    const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
+    console.log(storedCoordinates);
+    const apiCurrentForecastUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
 
+    fetch(apiCurrentForecastUrl).then(function (response) {
+        if(response.ok) {
+            response.json().then(function (data) {
+                console.log(data); 
+            })
+        } else {
+            alert('Error');
+        }
+    })
+
+    .catch(function (error) {
+        alert('Unable to connect'); 
+    })
 }; 
 
 // USER INTERACTIONS 
