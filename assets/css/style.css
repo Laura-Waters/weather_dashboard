@@ -39,6 +39,8 @@ body {
 main {
     position: relative;
     height: 100%;
+    width: 100%;
+    display: flex;
 }
 
 /* Header/Nav ------------------------------------------------------------------------------------*/
@@ -72,4 +74,15 @@ h2 {
 
 .current-weather-card {
     width: 100%;
+}
+
+.card {
+    background-color: #114a8b;
+    color: #ffffff;
+    position: relative;
+}
+
+.card p {
+    text-align: center;
+    padding: 6px;
 }
