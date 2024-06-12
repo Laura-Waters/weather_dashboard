@@ -69,3 +69,7 @@ h2 {
     width: 80%;
     margin: 40px;
 }
+
+.current-weather-card {
+    width: 100%;
+}

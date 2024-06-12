@@ -39,6 +39,7 @@ const displaySearchHistory = function(city) {
 }
 
 
+
 const getCoordinates = function(city) {
     const apiCityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=38792de29430a8d8e76d2b4c582a85ec`;
 
@@ -82,6 +83,7 @@ const getWeatherData = function(coordinates) {
         if(response.ok) {
             response.json().then(function (data) {
                 console.log(data); 
+                localStorage.setItem('current-weather', JSON.stringify(data));
             })
         } else {
             alert('Error');
@@ -91,7 +93,45 @@ const getWeatherData = function(coordinates) {
     .catch(function (error) {
         alert('Unable to connect'); 
     })
+
+
+    displayCurrentWeather();
 }; 
+
+
+const displayCurrentWeather = function() {
+    const currentWeather = JSON.parse(localStorage.getItem('current-weather')); 
+    
+    const currentWeatherCard = $('<div>').addClass('current-weather-card')
+    const cardHeader = $('<h2>').addClass('card-header').text(currentWeather.name);
+    const cardContent = $('<p>').addClass('card-content').text(`Temp: ${currentWeather.main.temp}\u00B0F \n Wind: ${currentWeather.wind.speed}MPH \n Humidity: ${currentWeather.main.humidity}%`); 
+
+    currentWeatherCard.append(cardHeader, cardContent);
+    dashboardEl.append(currentWeatherCard); 
+
+}
+
+
+
+const fiveDayForecast = function(coordinates) {
+    const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
+    const apiFiveDayUrl = `api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=38792de29430a8d8e76d2b4c582a85ec`;
+
+    fetch(apiFiveDayUrl).then(function (response) {
+        if(response.ok) {
+            response.json().then(function (data) {
+                console.log(data); 
+            })
+        } else {
+            alert('Error');
+        }
+    })
+
+    .catch(function (error) {
+        alert('Unable to connect'); 
+    })
+}
 
 // USER INTERACTIONS 
 formEl.on('submit', handleFormSubmit); 
+
