@@ -20,14 +20,28 @@ const handleFormSubmit = function(event) {
 
     if (city) {
         getCoordinates(city);
-        formInputEl.val = '';
+        formInputEl.val('');
     } else {
         alert('Please enter a city.'); 
     }
+
+    displaySearchHistory(city); 
+
 }
+
+const displaySearchHistory = function(city) {
+    const cityCard = $('<div>')
+        .addClass('card')
+    const cityName = $('<p>').addClass('city-name').text(city);
+
+    cityCard.append(cityName);
+    searchHistoryEl.append(cityCard);  
+}
+
 
 const getCoordinates = function(city) {
     const apiCityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=38792de29430a8d8e76d2b4c582a85ec`;
+
 
     fetch(apiCityUrl).then(function (response) {
         if(response.ok) {
@@ -54,12 +68,15 @@ const getCoordinates = function(city) {
     .catch(function (error) {
         alert('Unable to connect'); 
     })
+
 }; 
+
 
 const getWeatherData = function(coordinates) {
     const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
     console.log(storedCoordinates);
-    const apiCurrentForecastUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
+    const apiCurrentForecastUrl = `https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=38792de29430a8d8e76d2b4c582a85ec`;
+
 
     fetch(apiCurrentForecastUrl).then(function (response) {
         if(response.ok) {
