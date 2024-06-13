@@ -106,7 +106,7 @@ const displayCurrentWeather = function(data) {
     
     const currentWeatherCard = $('<div>').addClass('current-weather-card'); 
     const cardHeader = $('<h2>').addClass('card-header').text(currentWeather.name);
-    const cardContent = $('<p>').addClass('card-content').text(`Temp: ${currentWeather.main.temp}\u00B0F \n Wind: ${currentWeather.wind.speed}MPH \n Humidity: ${currentWeather.main.humidity}%`); 
+    const cardContent = $('<p>').addClass('card-content').text(`Temp: ${currentWeather.main.temp}\u00B0F \nWind: ${currentWeather.wind.speed}MPH \nHumidity: ${currentWeather.main.humidity}%`); 
 
     currentWeatherCard.append(cardHeader, cardContent);
     dashboardEl.append(currentWeatherCard); 
@@ -117,11 +117,10 @@ const displayCurrentWeather = function(data) {
 
 const fiveDayForecast = function(coordinates) {
     const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
-    
     var express = require('express');
     var cors = require('cors');
     var app = express();
-
+    
     app.use(cors({origin:true, credentials:true})); 
     const apiFiveDayUrl = `api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
 

@@ -101,9 +101,22 @@ form {
     background-color: #114a8b;
     color: #ffffff;
     position: relative;
+    margin: 10px;
 }
 
 .card p {
     text-align: center;
-    padding: 6px;
+    padding: 4px;
+    padding-top: 8px;
+    font-size: 24px;
+}
+
+.current-weather-card {
+    background-color: #ffffff;
+    height: 200px;
+}
+
+.card-content {
+    height: 120px;
+    padding: 10px;
 }
