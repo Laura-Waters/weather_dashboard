@@ -61,6 +61,7 @@ const getCoordinates = function(city) {
                   }
                 
                 getWeatherData(coordinates); 
+                fiveDayForecast(coordinates); 
             });
         } else {
             alert('Error'); 
@@ -103,7 +104,7 @@ const getWeatherData = function(coordinates) {
 const displayCurrentWeather = function(data) {
     const currentWeather = JSON.parse(localStorage.getItem('current-weather')); 
     
-    const currentWeatherCard = $('<div>').addClass('current-weather-card')
+    const currentWeatherCard = $('<div>').addClass('current-weather-card'); 
     const cardHeader = $('<h2>').addClass('card-header').text(currentWeather.name);
     const cardContent = $('<p>').addClass('card-content').text(`Temp: ${currentWeather.main.temp}\u00B0F \n Wind: ${currentWeather.wind.speed}MPH \n Humidity: ${currentWeather.main.humidity}%`); 
 
@@ -116,12 +117,20 @@ const displayCurrentWeather = function(data) {
 
 const fiveDayForecast = function(coordinates) {
     const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
-    const apiFiveDayUrl = `api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=38792de29430a8d8e76d2b4c582a85ec`;
+    
+    var express = require('express');
+    var cors = require('cors');
+    var app = express();
+
+    app.use(cors({origin:true, credentials:true})); 
+    const apiFiveDayUrl = `api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
 
     fetch(apiFiveDayUrl).then(function (response) {
         if(response.ok) {
             response.json().then(function (data) {
                 console.log(data); 
+                localStorage.setItem('five-day-forecast', JSON.stringify(data));
+                displayFiveDayForecast(data); 
             })
         } else {
             alert('Error');
@@ -131,6 +140,38 @@ const fiveDayForecast = function(coordinates) {
     .catch(function (error) {
         alert('Unable to connect'); 
     })
+}
+
+const displayFiveDayForecast = function(coordinates) {
+    const fiveDayForecast = JSON.parse(localStorage.getItem('five-day-forecast')); 
+
+    const fiveDayCards = $('<div>').addClass('five-day-cards');
+    const dayOne = $('<div>').addClass('day-one'); 
+    const dayTwo = $('<div>').addClass('day-two'); 
+    const dayThree = $('<div>').addClass('day-three'); 
+    const dayFour = $('<div>').addClass('day-four'); 
+    const dayFive = $('<div>').addClass('day-five'); 
+    const headerOne = $('<h4>').addClass('header-one');
+    const headerTwo = $('<h4>').addClass('header-two');
+    const headerThree = $('<h4>').addClass('header-three');
+    const headerFour = $('<h4>').addClass('header-four');
+    const headerFive = $('<h4>').addClass('header-five'); 
+    const weatherOne = $('<p>').addClass('weather-one'); 
+    const weatherTwo = $('<p>').addClass('weather-two'); 
+    const weatherThree = $('<p>').addClass('weather-three'); 
+    const weatherFour = $('<p>').addClass('weather-four'); 
+    const weatherFive = $('<p>').addClass('weather-five');
+
+    dayOne.append(headerOne, weatherOne); 
+    dayTwo.append(headerTwo, weatherTwo);
+    dayThree.append(headerThree, weatherThree);
+    dayFour.append(headerFour, weatherFour); 
+    dayFive.append(headerFive, weatherFive); 
+    fiveDayCards.append(dayOne, dayTwo, dayThree, dayFour, dayFive); 
+   
+
+
+
 }
 
 // USER INTERACTIONS 
