@@ -144,4 +144,14 @@ form {
 .forecast-container {
     display: flex; 
     justify-content: space-between; 
+} 
+
+.icon {
+    width: 30%;
+    margin-left: 10px;
+}
+
+.five-cards-content {
+    margin: 10px;
+    margin-bottom: 20px;
 }

@@ -118,7 +118,7 @@ const displayCurrentWeather = function(data) {
 const fiveDayForecast = function(coordinates) {
     const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
    
-    const apiFiveDayUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
+    const apiFiveDayUrl = `https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
 
     fetch(apiFiveDayUrl).then(function (response) {
         if(response.ok) {
@@ -160,45 +160,50 @@ const displayFiveDayForecast = function() {
         const dayOneCard = $('<div>').addClass('five-cards'); 
         const dateOne = new Date(((dayOneArray.dt)*1000));
         const dayOneHeader = $('<h4>').addClass('day-header card-header').text(dateOne.toLocaleDateString('en-US'));
-        const dayOneContent = $('<p>').addClass('weather-content').html(dayOneArray.icon); 
+        const dayOneIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayOneArray.weather[0].icon}@2x.png"/>`); 
+        const dayOneContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayOneArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayOneArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayOneArray.main.humidity}%`)
 
-        dayOneCard.append(dayOneHeader, dayOneContent); 
+        dayOneCard.append(dayOneHeader, dayOneIcon, dayOneContent); 
         fiveDayForecastEl.append(dayOneCard); 
 
         /// DAY TWO 
         const dayTwoCard = $('<div>').addClass('five-cards'); 
         const dateTwo = new Date(((dayTwoArray.dt)*1000));
         const dayTwoHeader = $('<h4>').addClass('day-header card-header').text(dateTwo.toLocaleDateString('en-US'));
-        const dayTwoContent = $('<p>').addClass('weather-content').html(dayTwoArray.icon); 
+        const dayTwoIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayTwoArray.weather[0].icon}@2x.png"/>`); 
+        const dayTwoContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayTwoArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayTwoArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayTwoArray.main.humidity}%`)
  
-        dayTwoCard.append(dayTwoHeader, dayTwoContent); 
+        dayTwoCard.append(dayTwoHeader, dayTwoIcon, dayTwoContent); 
         fiveDayForecastEl.append(dayTwoCard); 
 
         /// DAY THREE 
         const dayThreeCard = $('<div>').addClass('five-cards'); 
         const dateThree = new Date(((dayThreeArray.dt)*1000));
         const dayThreeHeader = $('<h4>').addClass('day-header card-header').text(dateThree.toLocaleDateString('en-US'));
-        const dayThreeContent = $('<p>').addClass('weather-content').html(dayThreeArray.icon); 
+        const dayThreeIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayThreeArray.weather[0].icon}@2x.png"/>`); 
+        const dayThreeContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayThreeArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayThreeArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayThreeArray.main.humidity}%`)
     
-        dayThreeCard.append(dayThreeHeader, dayThreeContent); 
+        dayThreeCard.append(dayThreeHeader, dayThreeIcon, dayThreeContent); 
         fiveDayForecastEl.append(dayThreeCard); 
 
         /// DAY FOUR 
         const dayFourCard = $('<div>').addClass('five-cards'); 
         const dateFour = new Date(((dayFourArray.dt)*1000));
         const dayFourHeader = $('<h4>').addClass('day-header card-header').text(dateFour.toLocaleDateString('en-US'));
-        const dayFourContent = $('<p>').addClass('weather-content').html(dayFourArray.icon); 
+        const dayFourIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayFourArray.weather[0].icon}@2x.png"/>`); 
+        const dayFourContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayFourArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayFourArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayFourArray.main.humidity}%`)
       
-        dayFourCard.append(dayFourHeader, dayFourContent); 
+        dayFourCard.append(dayFourHeader, dayFourIcon, dayFourContent); 
         fiveDayForecastEl.append(dayFourCard); 
 
         /// DAY FIVE
         const dayFiveCard = $('<div>').addClass('five-cards'); 
         const dateFive = new Date(((dayFiveArray.dt)*1000));
         const dayFiveHeader = $('<h4>').addClass('day-header card-header').text(dateFive.toLocaleDateString('en-US'));
-        const dayFiveContent = $('<p>').addClass('weather-content').html(dayFiveArray.icon); 
+        const dayFiveIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayFiveArray.weather[0].icon}@2x.png"/>`); 
+        const dayFiveContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayFiveArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayFiveArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayFiveArray.main.humidity}%`)
       
-        dayFiveCard.append(dayFiveHeader, dayFiveContent); 
+        dayFiveCard.append(dayFiveHeader, dayFiveIcon, dayFiveContent); 
         fiveDayForecastEl.append(dayFiveCard); 
     } 
 
