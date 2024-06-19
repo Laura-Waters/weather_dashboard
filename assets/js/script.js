@@ -16,7 +16,7 @@ const searchHistoryEl = $('#search-history');
 // submit the city, send the city name to the getCoordinates function & the city name to the displaySearchHistory function 
 const handleFormSubmit = function(event) {
     event.preventDefault();
-
+    dashboardEl.empty();
     const city = formInputEl.val().trim();
 
     if (city) {
@@ -102,14 +102,12 @@ const getWeatherData = function(coordinates) {
 
 
 const displayCurrentWeather = function(data) {
-    const currentWeather = JSON.parse(localStorage.getItem('current-weather')); 
-    
     const currentWeatherCard = $('<div>').addClass('current-weather-card'); 
-    const cardHeader = $('<h2>').addClass('card-header').text(currentWeather.name);
-    const cardContent = $('<p>').addClass('card-content').text(`Temp: ${currentWeather.main.temp}\u00B0F \nWind: ${currentWeather.wind.speed}MPH \nHumidity: ${currentWeather.main.humidity}%`); 
+    const cardHeader = $('<h2>').addClass('card-header').text(data.name);
+    const cardContent = $('<p>').addClass('card-content').html(`<div class=lineOfText></div> Temp: ${data.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${data.wind.speed}MPH <div class=lineOfText></div> Humidity: ${data.main.humidity}%`); 
 
     currentWeatherCard.append(cardHeader, cardContent);
-    dashboardEl.append(currentWeatherCard); 
+    dashboardEl.append(currentWeatherCard);
 
 }
 
@@ -117,12 +115,8 @@ const displayCurrentWeather = function(data) {
 
 const fiveDayForecast = function(coordinates) {
     const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
-    var express = require('express');
-    var cors = require('cors');
-    var app = express();
-    
-    app.use(cors({origin:true, credentials:true})); 
-    const apiFiveDayUrl = `api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
+   
+    const apiFiveDayUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${storedCoordinates[0]}&lon=${storedCoordinates[1]}&appid=62586f440e3d8e4a5c064977738f344f`;
 
     fetch(apiFiveDayUrl).then(function (response) {
         if(response.ok) {
