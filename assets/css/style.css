@@ -114,6 +114,7 @@ form {
 .current-weather-card {
     background-color: #ffffff;
     height: 200px;
+    border-radius: 4px;
 }
 
 .card-content {
@@ -122,8 +123,25 @@ form {
 } 
 
 .lineOfText {
-    margin-top: 20px; 
-    margin-bottom: 20px;
+    margin: 20px
 }
 
+.card-header {
+    font-weight: bold;
+    padding: 10px;
+} 
 
+.five-cards {
+    width: 18%; 
+    margin-top: 20px;
+    background-color: #ffffff;
+} 
+
+.weather-content {
+    height: 160px; 
+} 
+
+.forecast-container {
+    display: flex; 
+    justify-content: space-between; 
+}

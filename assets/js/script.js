@@ -4,6 +4,7 @@ const formEl = $('#form');
 const formInputEl = $('#formInput');
 const submitButtonEl = $('#submit-button'); 
 const searchHistoryEl = $('#search-history'); 
+const fiveDayCardsEl = $('#five-day-forecast');
 
 // grab the value of the search input 
 // add the input into a cities array in local storage  
@@ -24,6 +25,7 @@ const handleFormSubmit = function(event) {
         formInputEl.val('');
     } else {
         alert('Please enter a city.'); 
+        return;
     }
 
     displaySearchHistory(city); 
@@ -135,36 +137,72 @@ const fiveDayForecast = function(coordinates) {
     })
 }
 
-const displayFiveDayForecast = function(coordinates) {
-    const fiveDayForecast = JSON.parse(localStorage.getItem('five-day-forecast')); 
+const displayFiveDayForecast = function() { 
+    const localStorageWeather = (JSON.parse(localStorage.getItem('five-day-forecast')));
+    console.log(localStorageWeather)
+    const weatherArray = [localStorageWeather.list]; 
 
-    const fiveDayCards = $('<div>').addClass('five-day-cards');
-    const dayOne = $('<div>').addClass('day-one'); 
-    const dayTwo = $('<div>').addClass('day-two'); 
-    const dayThree = $('<div>').addClass('day-three'); 
-    const dayFour = $('<div>').addClass('day-four'); 
-    const dayFive = $('<div>').addClass('day-five'); 
-    const headerOne = $('<h4>').addClass('header-one');
-    const headerTwo = $('<h4>').addClass('header-two');
-    const headerThree = $('<h4>').addClass('header-three');
-    const headerFour = $('<h4>').addClass('header-four');
-    const headerFive = $('<h4>').addClass('header-five'); 
-    const weatherOne = $('<p>').addClass('weather-one'); 
-    const weatherTwo = $('<p>').addClass('weather-two'); 
-    const weatherThree = $('<p>').addClass('weather-three'); 
-    const weatherFour = $('<p>').addClass('weather-four'); 
-    const weatherFive = $('<p>').addClass('weather-five');
 
-    dayOne.append(headerOne, weatherOne); 
-    dayTwo.append(headerTwo, weatherTwo);
-    dayThree.append(headerThree, weatherThree);
-    dayFour.append(headerFour, weatherFour); 
-    dayFive.append(headerFive, weatherFive); 
-    fiveDayCards.append(dayOne, dayTwo, dayThree, dayFour, dayFive); 
+    for (dayWeather of weatherArray) {
+        const dayOneArray = (dayWeather[8]); 
+        const dayTwoArray = (dayWeather[16]);
+        const dayThreeArray = (dayWeather[24]);
+        const dayFourArray = (dayWeather[32]); 
+        const dayFiveArray = (dayWeather[39]);
+
+        console.log(dayOneArray);
+        console.log(dayTwoArray); 
+
+        const fiveDayForecastEl = $('<div>').addClass('forecast-container');
+        dashboardEl.append(fiveDayForecastEl);
+
+        /// DAY ONE
+        const dayOneCard = $('<div>').addClass('five-cards'); 
+        const dateOne = new Date(((dayOneArray.dt)*1000));
+        const dayOneHeader = $('<h4>').addClass('day-header card-header').text(dateOne.toLocaleDateString('en-US'));
+        const dayOneContent = $('<p>').addClass('weather-content').html(dayOneArray.icon); 
+
+        dayOneCard.append(dayOneHeader, dayOneContent); 
+        fiveDayForecastEl.append(dayOneCard); 
+
+        /// DAY TWO 
+        const dayTwoCard = $('<div>').addClass('five-cards'); 
+        const dateTwo = new Date(((dayTwoArray.dt)*1000));
+        const dayTwoHeader = $('<h4>').addClass('day-header card-header').text(dateTwo.toLocaleDateString('en-US'));
+        const dayTwoContent = $('<p>').addClass('weather-content').html(dayTwoArray.icon); 
+ 
+        dayTwoCard.append(dayTwoHeader, dayTwoContent); 
+        fiveDayForecastEl.append(dayTwoCard); 
+
+        /// DAY THREE 
+        const dayThreeCard = $('<div>').addClass('five-cards'); 
+        const dateThree = new Date(((dayThreeArray.dt)*1000));
+        const dayThreeHeader = $('<h4>').addClass('day-header card-header').text(dateThree.toLocaleDateString('en-US'));
+        const dayThreeContent = $('<p>').addClass('weather-content').html(dayThreeArray.icon); 
+    
+        dayThreeCard.append(dayThreeHeader, dayThreeContent); 
+        fiveDayForecastEl.append(dayThreeCard); 
+
+        /// DAY FOUR 
+        const dayFourCard = $('<div>').addClass('five-cards'); 
+        const dateFour = new Date(((dayFourArray.dt)*1000));
+        const dayFourHeader = $('<h4>').addClass('day-header card-header').text(dateFour.toLocaleDateString('en-US'));
+        const dayFourContent = $('<p>').addClass('weather-content').html(dayFourArray.icon); 
+      
+        dayFourCard.append(dayFourHeader, dayFourContent); 
+        fiveDayForecastEl.append(dayFourCard); 
+
+        /// DAY FIVE
+        const dayFiveCard = $('<div>').addClass('five-cards'); 
+        const dateFive = new Date(((dayFiveArray.dt)*1000));
+        const dayFiveHeader = $('<h4>').addClass('day-header card-header').text(dateFive.toLocaleDateString('en-US'));
+        const dayFiveContent = $('<p>').addClass('weather-content').html(dayFiveArray.icon); 
+      
+        dayFiveCard.append(dayFiveHeader, dayFiveContent); 
+        fiveDayForecastEl.append(dayFiveCard); 
+    } 
+
    
-
-
-
 }
 
 // USER INTERACTIONS 
