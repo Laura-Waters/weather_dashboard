@@ -34,7 +34,7 @@ const handleFormSubmit = function(event) {
 
 const displaySearchHistory = function(city) {
     const cityCard = $('<div>')
-        .addClass('card')
+        .addClass('card city-button')
     const cityName = $('<p>').addClass('city-name').text(city);
 
     cityCard.append(cityName);
@@ -106,8 +106,10 @@ const getWeatherData = function(coordinates) {
 const displayCurrentWeather = function(data) {
     const currentWeatherCard = $('<div>').addClass('current-weather-card'); 
     const cardHeader = $('<h2>').addClass('card-header').text(data.name);
-    const cardContent = $('<p>').addClass('card-content').html(`<div class=lineOfText></div> Temp: ${data.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${data.wind.speed}MPH <div class=lineOfText></div> Humidity: ${data.main.humidity}%`); 
+    const currentWeatherIcon = $('<div>').html(`<img id="current-icon" class="icon" src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/>`); 
+    const cardContent = $('<p>').addClass('card-content').html(`<div></div> Temp: ${data.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${data.wind.speed}MPH <div class=lineOfText></div> Humidity: ${data.main.humidity}%`); 
 
+    cardHeader.append(currentWeatherIcon); 
     currentWeatherCard.append(cardHeader, cardContent);
     dashboardEl.append(currentWeatherCard);
 
@@ -161,7 +163,7 @@ const displayFiveDayForecast = function() {
         const dateOne = new Date(((dayOneArray.dt)*1000));
         const dayOneHeader = $('<h4>').addClass('day-header card-header').text(dateOne.toLocaleDateString('en-US'));
         const dayOneIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayOneArray.weather[0].icon}@2x.png"/>`); 
-        const dayOneContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayOneArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayOneArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayOneArray.main.humidity}%`)
+        const dayOneContent = $('<p>').addClass('five-cards-content').html(`<div></div> Temp: ${dayOneArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayOneArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayOneArray.main.humidity}%`)
 
         dayOneCard.append(dayOneHeader, dayOneIcon, dayOneContent); 
         fiveDayForecastEl.append(dayOneCard); 
@@ -171,7 +173,7 @@ const displayFiveDayForecast = function() {
         const dateTwo = new Date(((dayTwoArray.dt)*1000));
         const dayTwoHeader = $('<h4>').addClass('day-header card-header').text(dateTwo.toLocaleDateString('en-US'));
         const dayTwoIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayTwoArray.weather[0].icon}@2x.png"/>`); 
-        const dayTwoContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayTwoArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayTwoArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayTwoArray.main.humidity}%`)
+        const dayTwoContent = $('<p>').addClass('five-cards-content').html(`<div></div> Temp: ${dayTwoArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayTwoArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayTwoArray.main.humidity}%`)
  
         dayTwoCard.append(dayTwoHeader, dayTwoIcon, dayTwoContent); 
         fiveDayForecastEl.append(dayTwoCard); 
@@ -181,7 +183,7 @@ const displayFiveDayForecast = function() {
         const dateThree = new Date(((dayThreeArray.dt)*1000));
         const dayThreeHeader = $('<h4>').addClass('day-header card-header').text(dateThree.toLocaleDateString('en-US'));
         const dayThreeIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayThreeArray.weather[0].icon}@2x.png"/>`); 
-        const dayThreeContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayThreeArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayThreeArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayThreeArray.main.humidity}%`)
+        const dayThreeContent = $('<p>').addClass('five-cards-content').html(`<div></div> Temp: ${dayThreeArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayThreeArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayThreeArray.main.humidity}%`)
     
         dayThreeCard.append(dayThreeHeader, dayThreeIcon, dayThreeContent); 
         fiveDayForecastEl.append(dayThreeCard); 
@@ -191,7 +193,7 @@ const displayFiveDayForecast = function() {
         const dateFour = new Date(((dayFourArray.dt)*1000));
         const dayFourHeader = $('<h4>').addClass('day-header card-header').text(dateFour.toLocaleDateString('en-US'));
         const dayFourIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayFourArray.weather[0].icon}@2x.png"/>`); 
-        const dayFourContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayFourArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayFourArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayFourArray.main.humidity}%`)
+        const dayFourContent = $('<p>').addClass('five-cards-content').html(`<div></div> Temp: ${dayFourArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayFourArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayFourArray.main.humidity}%`)
       
         dayFourCard.append(dayFourHeader, dayFourIcon, dayFourContent); 
         fiveDayForecastEl.append(dayFourCard); 
@@ -201,7 +203,7 @@ const displayFiveDayForecast = function() {
         const dateFive = new Date(((dayFiveArray.dt)*1000));
         const dayFiveHeader = $('<h4>').addClass('day-header card-header').text(dateFive.toLocaleDateString('en-US'));
         const dayFiveIcon = $('<div>').html(`<img class="icon" src="https://openweathermap.org/img/wn/${dayFiveArray.weather[0].icon}@2x.png"/>`); 
-        const dayFiveContent = $('<p>').addClass('five-cards-content').html(`<div class=lineOfText></div> Temp: ${dayFiveArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayFiveArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayFiveArray.main.humidity}%`)
+        const dayFiveContent = $('<p>').addClass('five-cards-content').html(`<div></div> Temp: ${dayFiveArray.main.temp}\u00B0F <div class=lineOfText></div> Wind: ${dayFiveArray.wind.speed}MPH <div class=lineOfText></div> Humidity: ${dayFiveArray.main.humidity}%`)
       
         dayFiveCard.append(dayFiveHeader, dayFiveIcon, dayFiveContent); 
         fiveDayForecastEl.append(dayFiveCard); 
@@ -210,6 +212,6 @@ const displayFiveDayForecast = function() {
    
 }
 
+
 // USER INTERACTIONS 
 formEl.on('submit', handleFormSubmit); 
-

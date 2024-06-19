@@ -113,22 +113,28 @@ form {
 
 .current-weather-card {
     background-color: #ffffff;
-    height: 200px;
+    height: 190px;
     border-radius: 4px;
 }
 
 .card-content {
     height: 120px;
     padding: 10px;
+    padding-top: 14px;
 } 
 
 .lineOfText {
-    margin: 20px
+    padding: 10px;
 }
 
 .card-header {
     font-weight: bold;
     padding: 10px;
+    display: flex; 
+    align-items: center; 
+    background-color: #114a8b; 
+    color: #ffffff;
+    border-radius: 8px 8px 0 0;
 } 
 
 .five-cards {
@@ -155,3 +161,7 @@ form {
     margin: 10px;
     margin-bottom: 20px;
 }
+
+#current-icon {
+    width: 40%;
+} 
