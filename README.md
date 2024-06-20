@@ -23,7 +23,10 @@ Please refer to the LICENSE in the repo.
 
 ## Deployed Webpage
 
-https://laura-waters.github.io/weather_dashboard/
+https://laura-waters.github.io/weather_dashboard/ 
+
+<img width="1483" alt="weatherdashboard" src="https://github.com/Laura-Waters/weather_dashboard/assets/168473293/f7cff825-6966-41d9-b6e6-88c65978e46f">
+
 
 
 
