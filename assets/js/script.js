@@ -4,7 +4,7 @@ const formEl = $('#form');
 const formInputEl = $('#formInput');
 const submitButtonEl = $('#submit-button'); 
 const searchHistoryEl = $('#search-history'); 
-const fiveDayCardsEl = $('#five-day-forecast');
+const fiveDayCardsEl = $('#five-day-forecast'); 
 
 // grab the value of the search input 
 // add the input into a cities array in local storage  
@@ -36,6 +36,7 @@ const displaySearchHistory = function(city) {
     const cityCard = $('<div>')
         .addClass('card city-button')
     const cityName = $('<p>').addClass('city-name').text(city);
+    cityCard.css('cursor', 'pointer');
 
     cityCard.append(cityName);
     searchHistoryEl.append(cityCard);  
@@ -215,3 +216,9 @@ const displayFiveDayForecast = function() {
 
 // USER INTERACTIONS 
 formEl.on('submit', handleFormSubmit); 
+
+searchHistoryEl.on('click', '.city-name', function() {
+    dashboardEl.empty();
+    getCoordinates($(this).text());
+}); 
+
