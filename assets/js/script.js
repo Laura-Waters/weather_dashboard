@@ -44,7 +44,7 @@ const displaySearchHistory = function(city) {
 
 // get the coordinates of the inputted city, put those coord. in an array, save the array to local storage, send them to the getWeatherData function 
 const getCoordinates = function(city) {
-    const apiCityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=38792de29430a8d8e76d2b4c582a85ec`;
+    const apiCityUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=38792de29430a8d8e76d2b4c582a85ec`;
 
 
     fetch(apiCityUrl).then(function (response) {
